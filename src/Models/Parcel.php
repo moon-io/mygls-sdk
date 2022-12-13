@@ -50,6 +50,17 @@ class Parcel
      * @var Address|null
      */
     protected $pickupAddress;
+    
+    /**
+     * @var int|null
+     */
+    protected $pickupType;
+    
+    /**
+     * @var int|null
+     */
+    protected $pickupPoint;
+    
 
     /**
      * @var ContactContract|null
@@ -156,6 +167,30 @@ class Parcel
 
         return $this;
     }
+    
+    public function getPickupType(): ?int
+    {
+        return $this->pickupType;
+    }
+
+    public function setPickupType(int $pickupType): self
+    {
+        $this->pickupType = $pickupType;
+
+        return $this;
+    }
+    
+    public function getPickupPoint(): ?int
+    {
+        return $this->pikcupPoint;
+    }
+
+    public function setPickupPoint(int $pickupPoint): self
+    {
+        $this->pickupPoint = $pickupPoint;
+
+        return $this;
+    }
 
     public function getDeliveryInfo(): ?ContactContract
     {
@@ -217,6 +252,8 @@ class Parcel
             'DeliveryAddress' => $this->deliveryInfo ? $this->deliveryInfo->toArray() : null,
             'PickupAddress' => $this->pickupAddress ? $this->pickupAddress->toArray() : null,
             'PickupDate' => $this->formatPickupDate(),
+            'PickupType' => $this->pickupType,
+            'PickupPoint' => $this->pickupPoint,
             'ServiceList' => $this->formatServices(),
         ];
     }
@@ -263,6 +300,14 @@ class Parcel
             $address = $parcel->createAddress($data['PickupAddress']);
 
             return $parcel->setPickupAddress($address);
+        });
+        
+        $parcel->when(isset($data['PickupType']), function (Parcel $parcel) use ($data) {
+            return $parcel->setPickupType($data['PickupType']);
+        });
+        
+        $parcel->when(isset($data['PickupPoint']), function (Parcel $parcel) use ($data) {
+            return $parcel->setPickupPoint($data['PickupPoint']);
         });
 
         return $parcel;
