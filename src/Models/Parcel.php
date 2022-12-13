@@ -12,6 +12,16 @@ use Webapix\GLS\Models\Address as AddressModel;
 class Parcel
 {
     /**
+     * @var int
+     */
+    public const PICKUP_TYPE_ADDRESS = 1;
+    
+    /**
+     * @var int
+     */
+    public const PICKUP_TYPE_PARCEL_LOCKER = 2;
+
+    /**
      * @var string
      */
     protected $clientNumber;
