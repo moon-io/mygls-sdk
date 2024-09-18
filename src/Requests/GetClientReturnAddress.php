@@ -12,33 +12,46 @@ class GetClientReturnAddress extends Request
      */
     protected $endpoint = 'GetClientReturnAddress';
 
-
     /**
 	 * @var string
 	 */
 	protected $clientNumber;
 
 	/**
-	 * @var array
+	 * @var string
 	 */
-	protected $clientNumberList;
+	protected $name;
 
-	public function __construct(string $clientNumber, array $clientNumberList = [])
+    /**
+	 * @var int
+	 */
+	protected $linkTypeId;
+
+    /**
+	 * @var string
+	 */
+	protected $languageIsoCode;
+
+	public function __construct(string $clientNumber, string $name, int $linkTypeId, string $languageIsoCode)
 	{
 		$this->clientNumber = $clientNumber;
-		$this->clientNumberList = $clientNumberList;
+		$this->name = $name;
+		$this->linkTypeId = $linkTypeId;
+		$this->languageIsoCode = $languageIsoCode;
 	}
 
-    public function makeResponse(?array $data): Response
-    {
-        return new GetClientReturnAddressResponse($data);
-    }
-	
+	public function makeResponse(?array $data): Response
+	{
+		return new GetClientReturnAddressResponse($data);
+	}
+
 	public function toArray(): array
 	{
 		return [
 			'ClientNumber' => $this->clientNumber,
-			'ClientNumberList' => $this->clientNumberList,
+			'LinkTypeId' => $this->linkTypeId,
+			'LanguageIsoCode' => $this->languageIsoCode,
+			'Name' => $this->name,
 		];
 	}
 }
