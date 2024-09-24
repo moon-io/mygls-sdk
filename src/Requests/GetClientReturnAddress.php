@@ -23,16 +23,21 @@ class GetClientReturnAddress extends Request
 	protected $name;
 
     /**
-	 * @var int
+	 * @var ?int
 	 */
 	protected $linkTypeId;
 
     /**
-	 * @var string
+	 * @var ?string
 	 */
 	protected $languageIsoCode;
 
-	public function __construct(string $clientNumber, string $name, int $linkTypeId, string $languageIsoCode)
+	public function __construct(
+		string $clientNumber, 
+		string $name, 
+		?int $linkTypeId = null,
+		?string $languageIsoCode = null
+		)
 	{
 		$this->clientNumber = $clientNumber;
 		$this->name = $name;
