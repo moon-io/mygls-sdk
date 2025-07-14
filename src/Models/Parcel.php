@@ -192,7 +192,7 @@ class Parcel
     
     public function getPickupPoint(): ?int
     {
-        return $this->pikcupPoint;
+        return $this->pickupPoint;
     }
 
     public function setPickupPoint(int $pickupPoint): self
