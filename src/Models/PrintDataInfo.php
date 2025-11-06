@@ -121,4 +121,9 @@ class PrintDataInfo
     {
         return $this->clientReference;
     }
+
+    public function pin(): ?string
+    {
+        return $this->parcel->getPin();
+    }
 }
