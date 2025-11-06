@@ -71,6 +71,10 @@ class Parcel
      */
     protected $pickupPoint;
     
+    /**
+     * @var string|null
+     */
+    protected $pin;
 
     /**
      * @var ContactContract|null
@@ -201,6 +205,18 @@ class Parcel
 
         return $this;
     }
+    
+    public function getPin(): ?string
+    {
+        return $this->pin;
+    }
+
+    public function setPin(string $pin): self
+    {
+        $this->pin = $pin;
+
+        return $this;
+    }
 
     public function getDeliveryInfo(): ?ContactContract
     {
@@ -264,6 +280,7 @@ class Parcel
             'PickupDate' => $this->formatPickupDate(),
             'PickupType' => $this->pickupType,
             'PickupPoint' => $this->pickupPoint,
+            'PIN' => $this->pin,
             'ServiceList' => $this->formatServices(),
         ];
     }
@@ -318,6 +335,10 @@ class Parcel
         
         $parcel->when(isset($data['PickupPoint']), function (Parcel $parcel) use ($data) {
             return $parcel->setPickupPoint($data['PickupPoint']);
+        });
+        
+        $parcel->when(isset($data['PIN']), function (Parcel $parcel) use ($data) {
+            return $parcel->setPin($data['PIN']);
         });
 
         return $parcel;
