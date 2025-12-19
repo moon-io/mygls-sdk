@@ -11,7 +11,7 @@ class GetPrintData extends Request
     /**
      * @var string
      */
-    protected $endpoint = 'GetPrintData';
+    protected $endpoint = 'GetPrintData_20251022';
 
     /** @var Parcel[] */
     protected $parcelList = [];
