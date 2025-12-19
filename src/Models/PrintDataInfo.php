@@ -54,6 +54,11 @@ class PrintDataInfo
      */
     protected $clientReference;
 
+	/**
+     * @var string|null
+     */
+    protected $pin;
+
     public static function fromArray(array $data): PrintDataInfo
     {
         $printDataInfo = new PrintDataInfo();
@@ -67,6 +72,7 @@ class PrintDataInfo
         $printDataInfo->clientReference = $data['ClientReference'];
         $printDataInfo->depotNumber = $data['DepotNumber'];
         $printDataInfo->driver = $data['Driver'];
+		$printDataInfo->pin = $data['PIN'] ?? null;
         $printDataInfo->parcel = Parcel::fromArray($data['Parcel']);
 
         return $printDataInfo;
@@ -124,6 +130,6 @@ class PrintDataInfo
 
     public function pin(): ?string
     {
-        return $this->parcel->getPin();
+        return $this->pin;
     }
 }
