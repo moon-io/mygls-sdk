@@ -8,11 +8,11 @@ class GetClientReturnAddress extends Response
 {
     protected $errorKey = 'GetClientReturnAddressErrors';
 
-	protected $returnAddress;
+	protected ?ReturnAddress $returnAddress = null;
 
 	protected int $linkStatus;
-	
-	public function returnAddress(): ReturnAddress
+
+	public function returnAddress(): ?ReturnAddress
 	{
 		if (! $this->returnAddress) {
 			$this->buildReturnAddress();
@@ -20,7 +20,7 @@ class GetClientReturnAddress extends Response
 
 		return $this->returnAddress;
 	}
-	
+
 	public function linkStatus(): int
 	{
 		return (int) $this->data['LinkStatus'];
@@ -31,7 +31,7 @@ class GetClientReturnAddress extends Response
 		if (empty($this->data['ReturnAddress'])) {
 			return;
 		}
-		
+
 		$this->returnAddress = ReturnAddress::fromArray($this->data['ReturnAddress']);
 	}
 }
